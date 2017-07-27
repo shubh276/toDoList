@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Practice</title>
+        <script >
+                var listOftasks = [];
+                function addToList(){
+                
+                    var taskName = document.getElementById("taskName").value;
+                    listOftasks.push(taskName);
+                    var result = ""
+                    for(var i=0; i<listOftasks.length;i++){
+                        result += (i+1) + ". " + listOftasks[i] + " <button " + "onclick= " + "completed(" + i  + ")" + ">\u00D7</button>" + "<br>";
+                    }
+                    document.getElementById("taskList").innerHTML = result;
+                    var input = document.getElementById("taskName");
+                    return false;
+                }
+
+                function completed(k){
+
+                    var completedTask = document.getElementById("completedTask");
+                    var para = document.createElement("li");
+                    var node = document.createTextNode(listOftasks[k]);
+                    para.appendChild(node);
+                    completedTask.appendChild(para);
+
+                    var temp = [];
+                    for(var t=0; t<listOftasks.length; t++){
+                        if(t==k) {continue;}
+                        else{
+                            temp.push(listOftasks[t]);
+                        }
+                    };
+                    listOftasks = temp;
+                    temp = [];
+                    var result = ""
+                    for(var i=0; i<listOftasks.length;i++){
+                        result += (i+1) + ". " + listOftasks[i] + " <button " + "onclick= " + "completed(" + i  + ")" + ">\u00D7</button>" + "<br>";
+                    }
+
+                    document.getElementById("taskList").innerHTML = result;    
+                }
+        </script>
+    </head>
+    <body>
+        <h1>To Do List</h1>
+        <div><p id="taskList"></p></div>
+            <div>
+                Task Name:<input type="text" id="taskName" >
+                <button onclick="addToList()">Submit</button>
+            </div>
+
+        <div>
+            <h1>Completed Tasks.</h1>
+            <ul id="completedTask"></ul>
+        </div>
+    </body>
+</html>
